@@ -1,16 +1,65 @@
 package atividade1;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class TestarCliente {
 
-    public static void main(String[] args) {
+	 public static void main(String[] args) {
 
-        Cliente cliente1 = new Cliente("Jessica", "(11)9958325987", "166.999.333-44",
-                "jess@gmail.com", "R das Primas - 69 - JD Elite");
+	        Scanner sc = new Scanner(System.in);
 
-        Cliente cliente2 = new Cliente("Dener", "(11)9840663681", "546.859.123-01",
-                "dnr@gmail.com", "R Abilio Diniz - 25A - JD Macedonia");
+	        List<Cliente> clienteList = new ArrayList<>();
 
-        cliente1.visualizar();
-        cliente2.visualizar();
-    }
-}
+	        String cpf,cnpj,resposta;
+	        do {
+	            System.out.println("Nome: ");
+	            sc.skip("\\R?");
+	            String nome = sc.nextLine();
+
+	            System.out.println("Telefone: ");
+	            sc.skip("\\R?");
+	            String telefone = sc.nextLine();
+
+	            System.out.println("Idade: ");
+	            sc.skip("\\R?");
+	            Integer idade = sc.nextInt();
+
+	            System.out.println("Email: ");
+	            sc.skip("\\R?");
+	            String email = sc.nextLine();
+
+	            System.out.println("Endereço: ");
+	            sc.skip("\\R?");
+	            String endereco = sc.nextLine();
+
+	            System.out.println("Tipo: ");
+	            int tipo = sc.nextInt();
+
+	            switch (tipo){
+	                case 1 ->{
+	                    System.out.println("CPF: ");
+	                    sc.skip("\\R?");
+	                    cpf = sc.nextLine();
+	                    clienteList.add(new PessoaFisica(nome, telefone, idade, email, endereco, tipo, cpf));
+	                }
+	                case 2 ->{
+	                    System.out.println("CNPJ: ");
+	                    sc.skip("\\R?");
+	                    cnpj = sc.nextLine();
+	                    clienteList.add(new PessoaJuridica(nome, telefone, idade, email, endereco, tipo, cnpj));
+	                }
+	            }
+
+	            System.out.println("Deseja digitar mais um cliente: ");
+	            sc.skip("\\R?");
+	            resposta = sc.nextLine();
+
+	        }while (resposta.equalsIgnoreCase("s"));
+
+	        for (Cliente cliente : clienteList) {
+	            cliente.visualizar();
+	        }
+	    }
+	}

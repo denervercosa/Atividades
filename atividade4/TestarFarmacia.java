@@ -1,16 +1,62 @@
 package atividade4;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class TestarFarmacia {
 
 	public static void main(String[] args) {
 		
-		Farmacia f1 = new Farmacia(1, "Dipirona", "Novalgina", "Teuto", "-", 10.0f);
+		Scanner leia = new Scanner(System.in);
 		
-		Farmacia f2 = new Farmacia(2, "Paracetamol", "Tylenol", "Neo Quimica", "-", 20.0f);
+		ArrayList<Farmacia> medicamentos = new ArrayList<Farmacia>();
 		
-		f1.visualizar();
+		long id;
+		String nome, nomeComercial, fabricante, foto, opcao;
+		float preco;
 		
-		f2.visualizar();
+		do {
+			
+		System.out.println("\nId: " );
+		id = leia.nextLong();
+		
+		System.out.println("\nNome: " );
+		leia.skip("\\R?");
+		nome = leia.nextLine();
+		
+		System.out.println("\nNome Comercial: " );
+		nomeComercial = leia.nextLine();
+		
+		System.out.println("\nFabricante: " );
+		fabricante = leia.nextLine();
+		
+		System.out.println("\nFoto: " );
+		foto = leia.nextLine();
+		
+		System.out.println("\nPreço: " );
+		preco = leia.nextFloat();
+		
+		Farmacia f1 = new Farmacia(id, nome, nomeComercial, fabricante, foto, preco);
+		
+		medicamentos.add(f1);
+		
+		System.out.println("\nDeseja continuar? " );
+		leia.skip("\\R?");
+		opcao = leia.nextLine();
+		
+		}while(opcao.equalsIgnoreCase("S"));
+		
+		
+		for(var medicamento : medicamentos)
+			medicamento.visualizar();
+		
+		//Farmacia f2 = new Farmacia(2, "Paracetamol", "Tylenol", "Neo Quimica", "-", 20.0f);
+
+		//f1.visualizar();
+		
+		//f2.visualizar();
+		
+		leia.close();
 	}
 
 	
